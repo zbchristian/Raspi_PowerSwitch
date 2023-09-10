@@ -1,41 +1,42 @@
 /*
-  Raspberry Pi Power Switch with Digispark ATTINY85
-  =================================================
-  Port 0 : control power MOSFET n-channel to ground
-  Port 1 : toggle shutdown pin of Raspi (active high) 
-  Port 2 : receive pin for touch button
-  Port 3 : receive shutdown info from raspi (LOW)
-  Port 4 : send pin for touchbutton
+  Enable Car Radio/Moniceiver even when ignition is off with Digispark ATTINY85
+  =========================================================================================
+  Car radios are provided with two differnt 12V power lines:
+    - 12V permanent power
+    - auxiliary power. which is off, when the ignition is switched off
+  Most radios switch off and can not be turned on, when the ignition is off (no aux power). 
+  Internal setting are saved by means of the permanent power
 
-  How does the code work:
-  - Button (touch surface) triggers the start/shutdown of the raspberry pi
-  - Power is connected/disconnected from the raspi by means of a MOSFET ( n-channel with RDS(on)<=0.1 Ohm to diconnect GND from Raspi ) 
-  - after disconnecting, the remaining current is a few mA
-  - All timing is done in the Timer1 interrupt routine
-  - Main loop samples the button, sets flags and acts accordingly (request shutdown/power on the raspi)
+  This sketch provides the possibility to turn the radio on for a predefined maximal time (e.g. 30min or 1h). 
+  This is achieved by triggering a MOSFET switch (or relais) from the ATTINY to provide the aux power from permanent 12V.
+  The on time should be short enough in order to not drain the battery!!
+  
+  The external trigger, to enable the radio can be
+  - A hardware switch (push button)
+  - the ignition is briefly turned on (engine NOT started) and off again within a short time (e.g. 5 seconds).
+
+  This sketch contains another function: the ambient light is measured with a sensor and the display of the Moniceiver 
+  can be set to day/night mode. For this the device has to have a corresponding input (e.g Pioneer moniceivers provide a cable for the light switch)
+
+  Required Hardware: 
+    - Digispark ATTINY85 board
+      The onboard voltage regulator (78L05 or 78M05) is provided with the cars 12V (Vin connection)
+    - MOSFET switch or relais to connect aux power of the radio to permanent 12V. Needs to be switched by the GPIO pins (approx. 4V) of the ATTINY85
+    - ambient light sensor, which has the sensitivity of the human eye
+    - transistor to trigger the "lights on" signal (12V)
+    - connectors, cables, switch and housing for the setup
 
   The processor runs with a reduced clock speed to save power. Be aware, that this screws up the 
   the standard delay() function. Use delayms() instead, which uses a corrected timer.
+  The Bootloader runs at 16.5MHz. The clock speed is reduced by means of the clock prescaler (CLK_PRESC) down to approx. 1MHz
+  Timer setup is automatically adjusted to the chosen prescale factor
 
-  Required Hardware: Digispark ATTINY85 board
-                     - BE CAREFUL: the ATTINY runs at 5V and the Raspberry PI only 3.3V. The voltage levels should be adjusted when connecting GPIO pins.
-                       o From ATTINY to GPIO: add a green LED, which reduces the output voltage by approx 2V
-                       o From GPIO to ATTINY: depends on the pin. An input pin can directly be attached (no pull-up!). A 10k series resistor is recommended
-                         to avoid current flow in shutdown state. Pin 3 of the Digispark has a Zener diode and pull-up attached. This limits the voltage 
-                         already to 3V. The GPIO should pull Pin 3 to ground only and best over a standard diode.
-                       o Add 
-                     - The Bootloader runs at 16.5MHz. The clock speed is reduced by means of the clock prescaler (CLK_PRESC) down to approx. 1MHz
-                       Timer setup is automatically adjusted to the chosen prescale factor
-
-  Raspberry Pi settings: Configure two GPIOs in /boot/config.txt
-                     - Shutdown: set to HIGH and raspi will start shutdown: 
-                       dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down  
-                     - Set pin to LOW when starting up. After a shutdown the GPIO is undefined. Pullup sets it to HIGH -> power can be switched off:
-                       gpio=27=op,dl
-                        
-  Required package: CapacitiveSensor
-
-  C. Zeitnitz 2021
+  REMARK concerning the power consumption of the Arduino board:
+  At the reduced speed the current required by the CPU is of the order few mA (below 30mW). Each of the onboard LEDs require about the same power.
+  5mA per LED (1k resistor). In order to reduce the power consumption, either remove the corresponding resistors, or replace them with a 10k version 
+  (only 0.5mA current and still visible LED).
+  
+  C. Zeitnitz 2023
 */
 #include <avr/power.h>
 #include <CapacitiveSensor.h>
@@ -56,6 +57,8 @@
 #else
   #define CLOCK_DIV clock_div_1
 #endif
+
+#define buttonPin    0   // switch power of Raspi on/off (LOW/HIGH in case of n-channel) 
 
 #define MosFET    0   // switch power of Raspi on/off (LOW/HIGH in case of n-channel) 
 #define Shutdown  1   // inform Raspi to shutdown - put green LED in series to adjust to 3.3V  
@@ -78,12 +81,10 @@ volatile bool isDelay = false;
 // the setup function runs once when you press reset or power the board
 void setup() {
   clock_prescale_set(CLOCK_DIV);  // the program should go slow - save energy
+  pinMode(buttonPin, INPUT_PULLUP);
+  digitalWrite(buttonPin, HIGH);
   pinMode(MosFET, OUTPUT);
   digitalWrite(MosFET, LOW);      // turn power for Raspi OFF
-  pinMode(Shutdown, OUTPUT);
-  digitalWrite(Shutdown, LOW);
-  pinMode(raspHalt, INPUT);
-  digitalWrite(raspHalt, HIGH);
   setupTimer();
   state = BOOT;
   delayms(1000);
@@ -108,18 +109,21 @@ void loop() {
 }
 
 bool buttonActive() {
-  static int  ntouch = 0;
-  long        cs = but.capacitiveSensor(20);
+  static int  npressed = 0;
   bool        isAct = false;
-  if (cs > CapThresh) {
-      ++ntouch;
-      if (ntouch>3) {
+  if (digitalRead(buttonPin) == LOW) {
+      ++npressed;
+      if (npressed>3) {
         isAct = true;
-        ntouch=0;
+        npressed=0;
       }
   }
-  else ntouch=0;  
+  else npressed=0;  
   return isAct;
+}
+
+int getAmbientBrightness() {
+
 }
 
 volatile unsigned int delayTime = 0;
@@ -162,7 +166,7 @@ void setupTimer() {
   int presc = 128/CLK_PRESC;    // prescaler 128 for 16.5 MHz and just divide by prescale factor of the CPU clock
   byte cs_bits = (byte)(log(presc)/log(2)+1.5); // get bit patterns of prescale value (0.5 is added for rounding)
   TCCR1  |= cs_bits;
-  TIMSK   = _BV(OCIE1A);        // enable timer compare interrupt for compare
+  TIMSK   = _BV(OCIE1A);        // enable timer and set interrupt to compare
   OCR1C   = (byte) (( (CPUClk*1000.0) / presc)+0.5); // calculate counter value for the interrupt (max 255) 
   interrupts();                 // enable all interrupts
 }

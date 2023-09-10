@@ -1,7 +1,0 @@
-dtparam=act_led_trigger=heartbeat
-hdmi_blanking=2
-dtoverlay=disable-bt
-# shutdown by pulling GPIO to high level
-dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down
-# Set GPIO to low - after shutdown, the pin is pulled high by an external pullup (Digispark board)
-gpio=27=op,dl
