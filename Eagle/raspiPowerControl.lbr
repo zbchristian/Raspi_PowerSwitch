@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -197,14 +197,14 @@
 </package>
 <package name="DIGISPARK">
 <description>DigiSpark &lt;br&gt;</description>
-<wire x1="0" y1="0" x2="0" y2="17.78" width="0.127" layer="48"/>
-<wire x1="0" y1="17.78" x2="19.05" y2="17.78" width="0.127" layer="48"/>
-<wire x1="19.05" y1="17.78" x2="19.05" y2="0" width="0.127" layer="48"/>
-<wire x1="19.05" y1="0" x2="15.24" y2="0" width="0.127" layer="48"/>
-<wire x1="15.24" y1="0" x2="15.24" y2="-8.89" width="0.127" layer="48"/>
-<wire x1="15.24" y1="-8.89" x2="3.81" y2="-8.89" width="0.127" layer="48"/>
-<wire x1="3.81" y1="-8.89" x2="3.81" y2="0" width="0.127" layer="48"/>
-<wire x1="3.81" y1="0" x2="0" y2="0" width="0.127" layer="48"/>
+<wire x1="0" y1="0" x2="0" y2="17.78" width="0.127" layer="21"/>
+<wire x1="0" y1="17.78" x2="19.05" y2="17.78" width="0.127" layer="21"/>
+<wire x1="19.05" y1="17.78" x2="19.05" y2="0" width="0.127" layer="21"/>
+<wire x1="19.05" y1="0" x2="15.24" y2="0" width="0.127" layer="21"/>
+<wire x1="15.24" y1="0" x2="15.24" y2="-8.89" width="0.127" layer="21"/>
+<wire x1="15.24" y1="-8.89" x2="3.81" y2="-8.89" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-8.89" x2="3.81" y2="0" width="0.127" layer="21"/>
+<wire x1="3.81" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
 <pad name="P5" x="2.54" y="16.51" drill="1" diameter="1.9304"/>
 <pad name="P4" x="5.08" y="16.51" drill="1" diameter="1.9304"/>
 <pad name="P3" x="7.62" y="16.51" drill="1" diameter="1.9304"/>
@@ -238,9 +238,9 @@ USB-</text>
 <text x="1.905" y="12.7" size="0.6096" layer="48" font="vector">P5
 A0
 3v</text>
-<text x="13.97" y="8.255" size="0.8128" layer="48" font="vector">Vin</text>
-<text x="13.97" y="5.715" size="0.8128" layer="48" font="vector">GND</text>
-<text x="13.97" y="3.175" size="0.8128" layer="48" font="vector">+5v</text>
+<text x="13.97" y="8.255" size="0.8128" layer="21" font="vector">Vin</text>
+<text x="13.97" y="5.715" size="0.8128" layer="21" font="vector">GND</text>
+<text x="13.97" y="3.175" size="0.8128" layer="21" font="vector">+5v</text>
 </package>
 <package name="SOT95P280X145-5N">
 <circle x="-2.41" y="1.05" radius="0.1" width="0.2" layer="21"/>
@@ -266,23 +266,90 @@ A0
 </package>
 <package name="DCDC-MINI">
 <description>DC/DC Step-Down converter 0.8-20V</description>
-<pad name="1" x="-8.89" y="3.81" drill="1" shape="long"/>
-<pad name="2" x="-8.89" y="1.27" drill="1" shape="long"/>
-<pad name="4" x="-8.89" y="-10.16" drill="1" shape="long"/>
-<pad name="3" x="-8.89" y="-7.62" drill="1" shape="long"/>
-<pad name="8" x="9.525" y="3.81" drill="1" shape="long"/>
-<pad name="7" x="9.525" y="1.27" drill="1" shape="long"/>
-<pad name="6" x="9.525" y="-7.62" drill="1" shape="long"/>
-<pad name="5" x="9.525" y="-10.16" drill="1" shape="long"/>
+<pad name="1" x="-8.763" y="3.302" drill="1" shape="long"/>
+<pad name="2" x="-8.763" y="0.762" drill="1" shape="long"/>
+<pad name="4" x="-8.763" y="-9.779" drill="1" shape="long"/>
+<pad name="3" x="-8.763" y="-7.239" drill="1" shape="long"/>
+<pad name="8" x="9.398" y="3.302" drill="1" shape="long"/>
+<pad name="7" x="9.398" y="0.762" drill="1" shape="long"/>
+<pad name="6" x="9.398" y="-7.239" drill="1" shape="long"/>
+<pad name="5" x="9.398" y="-9.779" drill="1" shape="long"/>
 <wire x1="-10.16" y1="5.08" x2="10.795" y2="5.08" width="0.127" layer="21"/>
 <wire x1="10.795" y1="5.08" x2="10.795" y2="-11.43" width="0.127" layer="21"/>
 <wire x1="10.795" y1="-11.43" x2="-10.16" y2="-11.43" width="0.127" layer="21"/>
 <wire x1="-10.16" y1="-11.43" x2="-10.16" y2="5.08" width="0.127" layer="21"/>
-<text x="-6.35" y="-3.175" size="1.27" layer="21">DC/DC Step Down</text>
-<text x="-6.985" y="1.905" size="1.27" layer="21">IN-</text>
-<text x="-6.985" y="-9.525" size="1.27" layer="21">IN+</text>
-<text x="3.81" y="1.27" size="1.27" layer="21">OUT-</text>
-<text x="3.81" y="-9.525" size="1.27" layer="21">OUT+</text>
+<text x="-6.223" y="-3.175" size="1.27" layer="21">DC/DC Step Down</text>
+<text x="-6.858" y="1.397" size="1.27" layer="21">IN-</text>
+<text x="-6.858" y="-9.144" size="1.27" layer="21">IN+</text>
+<text x="3.81" y="0.762" size="1.27" layer="21">OUT-</text>
+<text x="3.81" y="-9.144" size="1.27" layer="21">OUT+</text>
+</package>
+<package name="DIGISPARK-SMD">
+<description>DigiSpark with SMD Pads&lt;br&gt;</description>
+<wire x1="0" y1="0" x2="0" y2="17.78" width="0.127" layer="21"/>
+<wire x1="0" y1="17.78" x2="19.05" y2="17.78" width="0.127" layer="21"/>
+<wire x1="19.05" y1="17.78" x2="19.05" y2="0" width="0.127" layer="21"/>
+<wire x1="19.05" y1="0" x2="15.24" y2="0" width="0.127" layer="21"/>
+<wire x1="15.24" y1="0" x2="15.24" y2="-8.89" width="0.127" layer="21"/>
+<wire x1="15.24" y1="-8.89" x2="3.81" y2="-8.89" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-8.89" x2="3.81" y2="0" width="0.127" layer="21"/>
+<wire x1="3.81" y1="0" x2="0" y2="0" width="0.127" layer="21"/>
+<text x="0" y="19.05" size="1.27" layer="25" font="vector">&gt;NAME</text>
+<rectangle x1="5.08" y1="-8.89" x2="6.35" y2="0" layer="48"/>
+<rectangle x1="7.62" y1="-7.62" x2="8.89" y2="0" layer="48"/>
+<rectangle x1="10.16" y1="-7.62" x2="11.43" y2="0" layer="48"/>
+<rectangle x1="12.7" y1="-8.89" x2="13.97" y2="0" layer="48"/>
+<text x="14.605" y="12.7" size="0.6096" layer="48" font="vector">P0
+SDA
+PWM</text>
+<text x="12.065" y="12.7" size="0.6096" layer="48" font="vector">P1
+LED
+PWM</text>
+<text x="9.525" y="12.7" size="0.6096" layer="21" font="vector">P2
+SCL
+A1</text>
+<text x="6.985" y="12.7" size="0.6096" layer="48" font="vector">P3
+A3
+USB+</text>
+<text x="4.445" y="11.938" size="0.6096" layer="48" font="vector">P4
+As
+PWM
+USB-</text>
+<text x="1.905" y="12.7" size="0.6096" layer="48" font="vector">P5
+A0
+3v</text>
+<text x="13.97" y="8.255" size="0.8128" layer="21" font="vector">Vin</text>
+<text x="13.97" y="5.715" size="0.8128" layer="21" font="vector">GND</text>
+<text x="13.97" y="3.175" size="0.8128" layer="21" font="vector">+5v</text>
+<smd name="P5" x="2.54" y="17.78" dx="5.08" dy="1.778" layer="1" rot="R90"/>
+<smd name="P4" x="5.08" y="17.78" dx="5.08" dy="1.778" layer="1" rot="R90"/>
+<smd name="P3" x="7.62" y="17.78" dx="5.08" dy="1.778" layer="1" rot="R90"/>
+<smd name="P2" x="10.16" y="17.78" dx="5.08" dy="1.778" layer="1" rot="R90"/>
+<smd name="P1" x="12.7" y="17.78" dx="5.08" dy="1.778" layer="1" rot="R90"/>
+<smd name="P0" x="15.24" y="17.78" dx="5.08" dy="1.778" layer="1" rot="R90"/>
+<smd name="VIN" x="19.05" y="8.89" dx="5.08" dy="1.778" layer="1" rot="R180"/>
+<smd name="GND" x="19.05" y="6.35" dx="5.08" dy="1.778" layer="1" rot="R180"/>
+<smd name="5V" x="19.05" y="3.81" dx="5.08" dy="1.778" layer="1" rot="R180"/>
+</package>
+<package name="DCDC-MINI-SMD">
+<description>DC/DC Step-Down converter 0.8-20V</description>
+<wire x1="-10.16" y1="5.08" x2="10.795" y2="5.08" width="0.127" layer="21"/>
+<wire x1="10.795" y1="5.08" x2="10.795" y2="-11.43" width="0.127" layer="21"/>
+<wire x1="10.795" y1="-11.43" x2="-10.16" y2="-11.43" width="0.127" layer="21"/>
+<wire x1="-10.16" y1="-11.43" x2="-10.16" y2="5.08" width="0.127" layer="21"/>
+<text x="-6.223" y="-3.175" size="1.27" layer="21">DC/DC Step Down</text>
+<text x="-6.858" y="1.397" size="1.27" layer="21">IN-</text>
+<text x="-6.858" y="-9.144" size="1.27" layer="21">IN+</text>
+<text x="3.81" y="0.762" size="1.27" layer="21">OUT-</text>
+<text x="3.81" y="-9.144" size="1.27" layer="21">OUT+</text>
+<smd name="IN-1" x="-9.652" y="3.302" dx="5.08" dy="1.778" layer="1"/>
+<smd name="IN-2" x="-9.652" y="0.762" dx="5.08" dy="1.778" layer="1"/>
+<smd name="IN+1" x="-9.525" y="-7.239" dx="5.08" dy="1.778" layer="1"/>
+<smd name="IN+2" x="-9.525" y="-9.779" dx="5.08" dy="1.778" layer="1"/>
+<smd name="OUT+2" x="10.16" y="-9.779" dx="5.08" dy="1.778" layer="1"/>
+<smd name="OUT+1" x="10.16" y="-7.239" dx="5.08" dy="1.778" layer="1"/>
+<smd name="OUT-2" x="10.16" y="0.762" dx="5.08" dy="1.778" layer="1"/>
+<smd name="OUT-1" x="10.16" y="3.302" dx="5.08" dy="1.778" layer="1"/>
 </package>
 </packages>
 <packages3d>
@@ -469,6 +536,22 @@ http://digistump.com/wiki/digispark &lt;br&gt;</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="DIGISPARK-SMD" package="DIGISPARK-SMD">
+<connects>
+<connect gate="G$1" pin="5V" pad="5V"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="P0" pad="P0"/>
+<connect gate="G$1" pin="P1" pad="P1"/>
+<connect gate="G$1" pin="P2" pad="P2"/>
+<connect gate="G$1" pin="P3" pad="P3"/>
+<connect gate="G$1" pin="P4" pad="P4"/>
+<connect gate="G$1" pin="P5" pad="P5"/>
+<connect gate="G$1" pin="VIN" pad="VIN"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 </devices>
 </deviceset>
 <deviceset name="BATTERY+12V" prefix="P+">
@@ -556,6 +639,21 @@ http://digistump.com/wiki/digispark &lt;br&gt;</description>
 <connect gate="G$1" pin="OUT+@2" pad="6"/>
 <connect gate="G$1" pin="OUT-@1" pad="7"/>
 <connect gate="G$1" pin="OUT-@2" pad="8"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="DCDC-MINI-SMD" package="DCDC-MINI-SMD">
+<connects>
+<connect gate="G$1" pin="IN+@1" pad="IN+1"/>
+<connect gate="G$1" pin="IN+@2" pad="IN+2"/>
+<connect gate="G$1" pin="IN-@1" pad="IN-1"/>
+<connect gate="G$1" pin="IN-@2" pad="IN-2"/>
+<connect gate="G$1" pin="OUT+@1" pad="OUT+1"/>
+<connect gate="G$1" pin="OUT+@2" pad="OUT+2"/>
+<connect gate="G$1" pin="OUT-@1" pad="OUT-1"/>
+<connect gate="G$1" pin="OUT-@2" pad="OUT-2"/>
 </connects>
 <technologies>
 <technology name=""/>
