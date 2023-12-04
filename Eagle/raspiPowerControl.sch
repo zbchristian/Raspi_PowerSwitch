@@ -10111,6 +10111,9 @@ Button:
 <sheet>
 <description>Addition for 12V car battery powering</description>
 <plain>
+<text x="7.62" y="48.26" size="1.4224" layer="95">Powering options:
+1) Provide 5V to J2 and close the solder jumper (NO DC/DC converter)
+2) Add the DC/DC converter and provide the input voltage to J2 (e.g. 12V car battery voltage)</text>
 </plain>
 <instances>
 <instance part="MP1584" gate="G$1" x="50.8" y="27.94" smashed="yes">
@@ -10131,7 +10134,7 @@ Button:
 <attribute name="VALUE" x="86.36" y="30.48" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="PWR=5V" gate="1" x="48.26" y="7.62" smashed="yes" rot="R180">
-<attribute name="NAME" x="45.72" y="7.239" size="1.778" layer="95" rot="R180"/>
+<attribute name="NAME" x="53.34" y="4.699" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="45.72" y="9.525" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
