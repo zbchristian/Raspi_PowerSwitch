@@ -1,10 +1,14 @@
 Designator,Mid X,Mid Y,Layer,Rotation
+3.3V,16.51,26.67,Bottom,180.0
 C1,25.27,27.18,Bottom,90.0
 C3,28.58,23.88,Bottom,0.0
-D1,29.72,20.57,Bottom,90.0
-IC1,29.46,27.18,Bottom,90.0
+D1,29.97,21.08,Bottom,0.0
+IC1,29.46,27.18,Bottom,0.0
 MP1584,13.46,12.32,Bottom,0.0
-Q1,28.70, 9.14,Bottom,0.0
-R1,26.80,17.14,Bottom,0.0
-R2,30.48,16.89,Bottom,90.0
-T1,27.69,13.59,Bottom,0.0
+P2/GND,11.43,26.67,Bottom,180.0
+P4,13.97,26.67,Bottom,180.0
+PWR=5V,16.13,21.72,Bottom,180.0
+Q1,28.70, 9.14,Bottom,90.0
+R1,27.81,17.02,Bottom,0.0
+R2,31.24,13.84,Bottom,270.0
+T1,27.69,13.72,Bottom,90.0
