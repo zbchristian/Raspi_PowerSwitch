@@ -109,11 +109,11 @@ void loop() {
 
 bool buttonActive() {
   static int  ntouch = 0;
-  long        cs = but.capacitiveSensor(20);
+  long        cs = but.capacitiveSensor(50);
   bool        isAct = false;
   if (cs > CapThresh) {
       ++ntouch;
-      if (ntouch>3) {
+      if (ntouch>2) {
         isAct = true;
         ntouch=0;
       }

@@ -337,23 +337,23 @@ W = angled&lt;p&gt;
 <rectangle x1="7.62" y1="-7.62" x2="8.89" y2="0" layer="48"/>
 <rectangle x1="10.16" y1="-7.62" x2="11.43" y2="0" layer="48"/>
 <rectangle x1="12.7" y1="-8.89" x2="13.97" y2="0" layer="48"/>
-<text x="14.605" y="12.7" size="0.6096" layer="48" font="vector">P0
+<text x="14.605" y="12.7" size="0.6096" layer="21" font="vector">P0
 SDA
 PWM</text>
-<text x="12.065" y="12.7" size="0.6096" layer="48" font="vector">P1
+<text x="12.065" y="12.7" size="0.6096" layer="21" font="vector">P1
 LED
 PWM</text>
 <text x="9.525" y="12.7" size="0.6096" layer="21" font="vector">P2
 SCL
 A1</text>
-<text x="6.985" y="12.7" size="0.6096" layer="48" font="vector">P3
+<text x="6.985" y="12.7" size="0.6096" layer="21" font="vector">P3
 A3
 USB+</text>
-<text x="4.445" y="11.938" size="0.6096" layer="48" font="vector">P4
+<text x="4.445" y="11.938" size="0.6096" layer="21" font="vector">P4
 As
 PWM
 USB-</text>
-<text x="1.905" y="12.7" size="0.6096" layer="48" font="vector">P5
+<text x="1.905" y="12.7" size="0.6096" layer="21" font="vector">P5
 A0
 3v</text>
 <text x="13.97" y="8.255" size="0.8128" layer="21" font="vector">Vin</text>
@@ -418,6 +418,23 @@ A0
 </package>
 </packages>
 <symbols>
+<symbol name="DCDC-MINI">
+<description>DC/DC Step-Down Converter 3A 0.8V-20V</description>
+<pin name="OUT+@2" x="15.24" y="-12.7" length="middle" direction="pwr" rot="R180"/>
+<pin name="IN-@1" x="-22.86" y="-2.54" length="middle" direction="pwr"/>
+<wire x1="-17.78" y1="0" x2="-17.78" y2="-15.24" width="0.254" layer="94"/>
+<wire x1="-17.78" y1="-15.24" x2="10.16" y2="-15.24" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-15.24" x2="10.16" y2="0" width="0.254" layer="94"/>
+<wire x1="10.16" y1="0" x2="-17.78" y2="0" width="0.254" layer="94"/>
+<text x="-15.24" y="2.54" size="1.27" layer="94">&gt;NAME</text>
+<text x="-15.24" y="-17.78" size="1.27" layer="94">&gt;VALUE</text>
+<pin name="IN+@2" x="-22.86" y="-12.7" length="middle" direction="pwr"/>
+<pin name="OUT-@1" x="15.24" y="-2.54" length="middle" direction="pwr" rot="R180"/>
+<pin name="IN-@2" x="-22.86" y="-5.08" length="middle" direction="pwr"/>
+<pin name="IN+@1" x="-22.86" y="-10.16" length="middle" direction="pwr"/>
+<pin name="OUT-@2" x="15.24" y="-5.08" length="middle" direction="pwr" rot="R180"/>
+<pin name="OUT+@1" x="15.24" y="-10.16" length="middle" direction="pwr" rot="R180"/>
+</symbol>
 <symbol name="DIGISPARK">
 <description>Digispark &lt;br&gt;
 http://digistump.com/wiki/digispark &lt;br&gt;</description>
@@ -473,25 +490,46 @@ A0
 <wire x1="5.08" y1="1.27" x2="5.08" y2="-0.254" width="0.127" layer="97"/>
 <wire x1="4.318" y1="1.27" x2="5.842" y2="1.27" width="0.127" layer="97"/>
 </symbol>
-<symbol name="DCDC-MINI">
-<description>DC/DC Step-Down Converter 3A 0.8V-20V</description>
-<pin name="OUT+@2" x="15.24" y="-12.7" length="middle" direction="pwr" rot="R180"/>
-<pin name="IN-@1" x="-22.86" y="-2.54" length="middle" direction="pwr"/>
-<wire x1="-17.78" y1="0" x2="-17.78" y2="-15.24" width="0.254" layer="94"/>
-<wire x1="-17.78" y1="-15.24" x2="10.16" y2="-15.24" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-15.24" x2="10.16" y2="0" width="0.254" layer="94"/>
-<wire x1="10.16" y1="0" x2="-17.78" y2="0" width="0.254" layer="94"/>
-<text x="-15.24" y="2.54" size="1.27" layer="94">&gt;NAME</text>
-<text x="-15.24" y="-17.78" size="1.27" layer="94">&gt;VALUE</text>
-<pin name="IN+@2" x="-22.86" y="-12.7" length="middle" direction="pwr"/>
-<pin name="OUT-@1" x="15.24" y="-2.54" length="middle" direction="pwr" rot="R180"/>
-<pin name="IN-@2" x="-22.86" y="-5.08" length="middle" direction="pwr"/>
-<pin name="IN+@1" x="-22.86" y="-10.16" length="middle" direction="pwr"/>
-<pin name="OUT-@2" x="15.24" y="-5.08" length="middle" direction="pwr" rot="R180"/>
-<pin name="OUT+@1" x="15.24" y="-10.16" length="middle" direction="pwr" rot="R180"/>
-</symbol>
 </symbols>
 <devicesets>
+<deviceset name="DCDC-MINI">
+<description>DC/DC Step-Down Converter 0.8-20V</description>
+<gates>
+<gate name="G$1" symbol="DCDC-MINI" x="-5.08" y="10.16"/>
+</gates>
+<devices>
+<device name="" package="DCDC-MINI">
+<connects>
+<connect gate="G$1" pin="IN+@1" pad="3"/>
+<connect gate="G$1" pin="IN+@2" pad="4"/>
+<connect gate="G$1" pin="IN-@1" pad="1"/>
+<connect gate="G$1" pin="IN-@2" pad="2"/>
+<connect gate="G$1" pin="OUT+@1" pad="5"/>
+<connect gate="G$1" pin="OUT+@2" pad="6"/>
+<connect gate="G$1" pin="OUT-@1" pad="7"/>
+<connect gate="G$1" pin="OUT-@2" pad="8"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="DCDC-MINI-SMD" package="DCDC-MINI-SMD">
+<connects>
+<connect gate="G$1" pin="IN+@1" pad="IN+1"/>
+<connect gate="G$1" pin="IN+@2" pad="IN+2"/>
+<connect gate="G$1" pin="IN-@1" pad="IN-1"/>
+<connect gate="G$1" pin="IN-@2" pad="IN-2"/>
+<connect gate="G$1" pin="OUT+@1" pad="OUT+1"/>
+<connect gate="G$1" pin="OUT+@2" pad="OUT+2"/>
+<connect gate="G$1" pin="OUT-@1" pad="OUT-1"/>
+<connect gate="G$1" pin="OUT-@2" pad="OUT-2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="DIGISPARK">
 <description>Digispark &lt;br&gt;
 http://digistump.com/wiki/digispark &lt;br&gt;</description>
@@ -526,44 +564,6 @@ http://digistump.com/wiki/digispark &lt;br&gt;</description>
 <connect gate="G$1" pin="P4" pad="P4"/>
 <connect gate="G$1" pin="P5" pad="P5"/>
 <connect gate="G$1" pin="VIN" pad="VIN"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="DCDC-MINI">
-<description>DC/DC Step-Down Converter 0.8-20V</description>
-<gates>
-<gate name="G$1" symbol="DCDC-MINI" x="-5.08" y="10.16"/>
-</gates>
-<devices>
-<device name="" package="DCDC-MINI">
-<connects>
-<connect gate="G$1" pin="IN+@1" pad="3"/>
-<connect gate="G$1" pin="IN+@2" pad="4"/>
-<connect gate="G$1" pin="IN-@1" pad="1"/>
-<connect gate="G$1" pin="IN-@2" pad="2"/>
-<connect gate="G$1" pin="OUT+@1" pad="5"/>
-<connect gate="G$1" pin="OUT+@2" pad="6"/>
-<connect gate="G$1" pin="OUT-@1" pad="7"/>
-<connect gate="G$1" pin="OUT-@2" pad="8"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="DCDC-MINI-SMD" package="DCDC-MINI-SMD">
-<connects>
-<connect gate="G$1" pin="IN+@1" pad="IN+1"/>
-<connect gate="G$1" pin="IN+@2" pad="IN+2"/>
-<connect gate="G$1" pin="IN-@1" pad="IN-1"/>
-<connect gate="G$1" pin="IN-@2" pad="IN-2"/>
-<connect gate="G$1" pin="OUT+@1" pad="OUT+1"/>
-<connect gate="G$1" pin="OUT+@2" pad="OUT+2"/>
-<connect gate="G$1" pin="OUT-@1" pad="OUT-1"/>
-<connect gate="G$1" pin="OUT-@2" pad="OUT-2"/>
 </connects>
 <technologies>
 <technology name=""/>
