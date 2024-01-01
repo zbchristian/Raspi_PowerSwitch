@@ -60,7 +60,7 @@
 #define MosFET    0   // switch power of Raspi on/off (LOW/HIGH in case of n-channel) 
 #define Shutdown  1   // inform Raspi to shutdown - put green LED in series to adjust to 3.3V  
 #define raspHalt  3   // external pullup (1k5) and 3V Zener - Raspi sets this pin to (LOW) when running. Pulled to HIGH after shutdown 
-#define CapOut    4   // connect 10MOhm to touch surface (small metal piece)
+#define CapOut    4   // connect 1-10MOhm to touch surface (small metal piece)
 #define CapIn     2   // connect directly to touch surface
 #define CapThresh 20  // threshold to detect, that metal surface has been touched. NEEDS ADJUSTMENT! 
 
