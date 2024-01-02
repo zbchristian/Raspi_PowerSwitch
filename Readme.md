@@ -20,7 +20,7 @@ This device has been developped for the powering of a Raspberry Pi 3a used as Wi
 is used in a Camper Van to connect to camp ground wireless networks or LTE/4G. The device is powered in this case by 12V.   
 The power required by the device, when the Raspberry Pi is switched off, is about 20mW (ca. 1.5mA@12V).
 
-![Prototype](images/raspi_PowerSwitch_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+![Prototype](images/PwrSwitch_Raspi3a_500px.jpg?raw=true "Prototype of the Power Switch Raspberry Pi 3a")
 
 Required Hardware Components
 -------------------
@@ -50,6 +50,9 @@ Schematic and board design are available in the Autodesk EAGLE format. Gerber fi
 The board connects to the first 14 pins of the extension port of the Raspberry Pi via a pin header. The header is installed to the bottom of the board. A low profile header 
 is recommended. For the Raspberry Pi 3a in its default case, the pins had to be shortened a bit and a header with a height of only 8.6mm has been used.  
 
+![Prototype](images/Front_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+
+
 The design of the board is somewhat special, because a very flat layout is needed to fit into a standard case. 
 Therefore the Arduino Tiny is soldered to somewhat large SMD pads. This is not difficult, but requires some soldering experience. To solder a solid wire (0.4mm) to the through holes of the 
 Arduino Tiny, bend the wires by 90° to the outside and solder the ends of the wires to the SMD pads. Before soldering, add an isolating tape to the bottom of the Arduino to avoid shorts. 
@@ -58,6 +61,8 @@ On the bottom side of the board a solder jumper sets the source of the power. A 
 on board regulator. For higher voltages, e.g. 12V from a car battery, the jumper should be left open and a mini DC-DC converter is soldered to the SMD pads on the bottom side. The output voltage of the DC-DC converter
 should be set to 5V.
 
+![Prototype](images/Backside_5V_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+![Prototype](images/Back_DCDC_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
 
 Quiescent Power Consumption
 --------------------------
