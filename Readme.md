@@ -50,7 +50,7 @@ Schematic and board design are available in the Autodesk EAGLE format. Gerber fi
 The board connects to the first 14 pins of the extension port of the Raspberry Pi via a pin header. The header is installed to the bottom of the board. A low profile header 
 is recommended. For the Raspberry Pi 3a in its default case, the pins had to be shortened a bit and a header with a height of only 8.6mm has been used.  
 
-![Prototype](images/Front_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+![Prototype](images/Front_h_400px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
 
 
 The design of the board is somewhat special, because a very flat layout is needed to fit into a standard case. 
@@ -61,8 +61,8 @@ On the bottom side of the board a solder jumper sets the source of the power. A 
 on board regulator. For higher voltages, e.g. 12V from a car battery, the jumper should be left open and a mini DC-DC converter is soldered to the SMD pads on the bottom side. The output voltage of the DC-DC converter
 should be set to 5V.
 
-![Prototype](images/Backside_5V_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
-![Prototype](images/Back_DCDC_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+![Prototype](images/Backside_5V_h_400px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+![Prototype](images/Back_DCDC_h_400px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
 
 Quiescent Power Consumption
 --------------------------
