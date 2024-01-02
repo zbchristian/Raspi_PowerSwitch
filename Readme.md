@@ -1,20 +1,20 @@
-Power Switch for Raspberry Pi based on Digispark Tiny Arduino
-=============================================================
+Power Switch for Raspberry Pi based on Arduino Tiny
+===================================================
 Per default the Raspberry Pi is powered via the USB port, but no power switch exists for a controlled shutdown.
 
 This device connects to the GPIO and power pins of the extension port.
 
 An Arduino Tiny (Digispark) controls the 5V supply voltage via an MOSFET switch (up to 3A).
 In addition the Arduino 
- - reads the status of the Raspberry Pi on ´GPIO 27´. Pulled low while the Raspberry Pi is running, 
- - sets the shutdown request on ´GPIO 17´ in case the button is pressed, 
+ - reads the status of the Raspberry Pi on `GPIO 27`. Pulled low while the Raspberry Pi is running, 
+ - sets the shutdown request on `GPIO 17` in case the button is pressed, 
  - disconnects the 5V supply from the Raspberry Pi after a predefined timeout.
 
 The device can be powered by a 5V supply, or a DC-DC converter can be added to allow the powering directly from a 12V supply (e.g. car battery). 
 The Arduino is supplied by a 3.3V regulator on the board. This ensures, that the signals of the Arduino and the Raspberry Pi are compatible.
 
 The default power button is a touch button connected via a 1MOhm resistor to Port 4 and sensed via Port 2 of the ATTINY85.
-For this the package ´CapacitiveSensor´ is required. A standard button can be connected to Port 2 as well.
+For this the package `CapacitiveSensor` is required. A standard button can be connected to Port 2 as well.
 
 This device has been developped for the powering of a Raspberry Pi 3a used as Wireless access point (installed is RaspAP) in a very flat case. The Raspberry Pi 
 is used in a Camper Van to connect to camp ground wireless networks or LTE/4G. The device is powered in this case by 12V.   
@@ -39,13 +39,13 @@ should be set to 5V.
 
 Changes needed on the Raspberry Pi
 ----------------------------------
-Add the following lines to ´/boot/config.txt´
-´´´´
+Add the following lines to `/boot/config.txt`
+````
 # Request shutdown by setting GPIO 17 to HIGH
 dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down
 # GPIO 27 flags the shutdown of the system
 gpio=27=op,dl
-´´´´
+````
 
 
 Quiescent Power Consumption
