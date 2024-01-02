@@ -10,7 +10,7 @@ In addition the Arduino
  - sets the shutdown request on `GPIO 17` in case the button is pressed, 
  - disconnects the 5V supply from the Raspberry Pi after a predefined timeout.
 
-The device can be powered by a 5V supply, or a DC-DC converter can be added to allow the powering directly from a 12V supply (e.g. car battery). 
+The device can be powered by a 5V supply, or a DC-DC converter can be added to allow the powering directly from a 12V (or higher) supply (e.g. car battery).
 The Arduino is supplied by a 3.3V regulator on the board. This ensures, that the signals of the Arduino and the Raspberry Pi are compatible.
 
 The default power button is a touch button connected via a 1MOhm resistor to Port 4 and sensed via Port 2 of the ATTINY85.
@@ -20,32 +20,43 @@ This device has been developped for the powering of a Raspberry Pi 3a used as Wi
 is used in a Camper Van to connect to camp ground wireless networks or LTE/4G. The device is powered in this case by 12V.   
 The power required by the device, when the Raspberry Pi is switched off, is about 20mW (ca. 1.5mA@12V).
 
-Required components
+![Prototype](images/raspi_PowerSwitch_500px.jpg?raw=true "Prototype of the Raspberry Pi Power Switch")
+
+Required Hardware Components
 -------------------
  - Arduino Tiny - Digispark board. The version with the micro USB port is preferred. This allows to program the board while soldered to the PCB.
  - DC-DC converter in case the the input voltage is higher than 5V.
  - PCB and the required components (SMD components and a pin header)
+ - MOSFET transistor 
+   - Suitable types: FDN360P, TMS2305, DMT3098 (package: SOT-23). All allow to switch up to 2A continuously, which should still be fine for a Raspberry Pi 4.
+   - For higher currents an IRF9310 (up to 16A) could be used, but this comes in a different package (SO-8) and the layout has to be changed accordingly.
 
-Board Design
-------------
-The board connects to the first 14 GPIO pins via a pin header, which is installed to the bottom of the board. 
+Software
+--------
+The Arduino IDE is used for the programming of the Arduino Tiny. See the header of the program file for more details of the program flow.
 
-The design of the board is somewhat special, because a very flat layout is needed to fit into a standard case. 
-Therefore the Arduino Tiny is soldered to SMD pads. This is not difficult, but requires some experience. Add an isolating tape to the bottom of the Arduino to avoid shorts. 
-
-On the bottom side of the board a solder jumper sets the source of the power. A closed jumper connects the input voltage from the pin headder directly to the Raspberry Pi and the 
-on board regulator. For higher voltages, e.g. 12V from a car battery, a mini DC-DC converter can be soldered to the SMD pads on the bottom side. The output voltage of the DC-DC converter
-should be set to 5V.
-
-Changes needed on the Raspberry Pi
-----------------------------------
-Add the following lines to `/boot/config.txt`
+On the Raspberry Pi side, you need to add the following lines to `/boot/config.txt`
 ````
 # Request shutdown by setting GPIO 17 to HIGH
 dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down
 # GPIO 27 flags the shutdown of the system
 gpio=27=op,dl
 ````
+
+Board Design
+------------
+Schematic and board design are available in the Autodesk EAGLE format. Gerber files, Bill of material and placement files are available as well.
+
+The board connects to the first 14 pins of the extension port of the Raspberry Pi via a pin header. The header is installed to the bottom of the board. A low profile header 
+is recommended. For the Raspberry Pi 3a in its default case, the pins had to be shortened a bit and a header with a height of only 8.6mm has been used.  
+
+The design of the board is somewhat special, because a very flat layout is needed to fit into a standard case. 
+Therefore the Arduino Tiny is soldered to somewhat large SMD pads. This is not difficult, but requires some soldering experience. To solder a solid wire (0.4mm) to the through holes of the 
+Arduino Tiny, bend the wires by 90° to the outside and solder the ends of the wires to the SMD pads. Before soldering, add an isolating tape to the bottom of the Arduino to avoid shorts. 
+
+On the bottom side of the board a solder jumper sets the source of the power. A closed jumper connects the input voltage from the pin header directly to the Raspberry Pi and the 
+on board regulator. For higher voltages, e.g. 12V from a car battery, the jumper should be left open and a mini DC-DC converter is soldered to the SMD pads on the bottom side. The output voltage of the DC-DC converter
+should be set to 5V.
 
 
 Quiescent Power Consumption
