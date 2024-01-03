@@ -14,7 +14,7 @@ The device can be powered by a 5V supply, or a DC-DC converter can be added to a
 The Arduino is supplied by a 3.3V regulator on the board. This ensures, that the signals of the Arduino and the Raspberry Pi are compatible.
 
 The default power button is a touch button connected via a 1MOhm resistor to Port 4 and sensed via Port 2 of the ATTINY85.
-A standard button can be connected to Port 2 as well.
+A standard button can be connected to Port 4 as well, but requires to adapt the code.
 
 This device has been developped for the powering of a Raspberry Pi 3a used as Wireless access point (installed is [RaspAP](https://raspap.com/) ) in a very flat case. The Raspberry Pi 
 is used in a Camper Van to connect to camp ground wireless networks or LTE/4G. The device is powered in this case by 12V.   
