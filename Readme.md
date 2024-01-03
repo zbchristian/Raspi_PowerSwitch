@@ -48,9 +48,9 @@ gpio=27=op,dl
 
 Board Design
 ------------
-Schematic and board design are available in the Autodesk EAGLE format. The library files contains the non-standard components (Arduino Tiny, DC-DC converter). Gerber files, Bill of material and placement files are available as well.
+Schematic and board design are available in the Autodesk EAGLE format. The library file contains the non-standard components (Arduino Tiny, DC-DC converter). Gerber files, Bill of material and placement files are available as well.
 
-The board connects to the first 14 pins of the extension port of the Raspberry Pi via a pin header. The header is installed to the bottom of the board. A low profile connector 
+The board connects to the first 14 pins of the extension port of the Raspberry Pi via a pin header. The header connector is installed to the bottom of the board. A low profile connector 
 is recommended. For the Raspberry Pi 3a in its default case, the pins had to be shortened a bit and a header with a height of only 8.6mm has been used.  
 
 ![Prototype](images/Front_h_400px.jpg?raw=true "frontside of the Raspberry Pi Power Switch")  
@@ -58,7 +58,8 @@ is recommended. For the Raspberry Pi 3a in its default case, the pins had to be 
 
 The design of the board is somewhat special, because a very flat layout is needed to fit into a standard case. 
 Therefore the Arduino Tiny is soldered to large SMD pads. This is not difficult, but requires some soldering experience. It might help to solder a solid wire (0.4mm) to the through holes of the 
-Arduino Tiny, bend the wires by 90° to the outside and solder the ends of the wires to the SMD pads. Before soldering, add an isolating tape to the bottom of the Arduino to avoid shorts. 
+Arduino Tiny, bend the wires by 90° to the outside, cut to length and solder the ends of the wires to the SMD pads.  
+Before soldering, add an isolating tape to the bottom of the Arduino to avoid shorts. 
 
 On the bottom side of the board a solder jumper sets the source of the power. A closed jumper connects the input voltage from the pin header directly to the Raspberry Pi and the 
 on board regulator. For higher voltages, e.g. 12V from a car battery, the jumper should be left open and a mini DC-DC converter is soldered to the SMD pads on the bottom side. The output voltage of the DC-DC converter
