@@ -62,11 +62,18 @@ Arduino Tiny, bend the wires by 90° to the outside and solder the ends of the w
 
 On the bottom side of the board a solder jumper sets the source of the power. A closed jumper connects the input voltage from the pin header directly to the Raspberry Pi and the 
 on board regulator. For higher voltages, e.g. 12V from a car battery, the jumper should be left open and a mini DC-DC converter is soldered to the SMD pads on the bottom side. The output voltage of the DC-DC converter
-should be set to 5V.
+should be set to 5V. Again add an isolating tape to the bottom of the DC-DC converter to avoid shorts. 
 
 ![Prototype](images/Backside_5V_h_400px.jpg?raw=true "Power switch for 5V input voltage")
 ![Prototype](images/Back_DCDC_h_400px.jpg?raw=true "Power switch for 12V input voltage utilizing a DC-DC converter mini")  
 *Bottom side of the Power Switch: left side for 5V input voltage with the solder jumper closed. On the right side the DC-DC converter is installed for a higher voltage*
+
+On the bottom side you find in addition 3 solder pads to connect a button. One of the pads carries either the signal of Port 2 or ground. This can be selected by the solder jumper on the top.
+ - Passive button: connect to Port 4 and the P2/GND pad and select GND with the solder jumper on the top.
+ - Software based touch button: connect to P4 and P2 (select P2 with the solder jumper on top).
+ - Hardware touch button: signal connected to P4. Powering by 3.3V and GND pad.
+
+The software based touch button is implemented in the code. The other options require an adaption of the code.  
 
 Quiescent Power Consumption
 --------------------------
