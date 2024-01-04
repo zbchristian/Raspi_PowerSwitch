@@ -1,5 +1,5 @@
-Power Switch for Raspberry Pi based on Arduino Tiny
-===================================================
+Power Switch HAT for Raspberry Pi based on Arduino Tiny
+=======================================================
 Per default the Raspberry Pi is powered via the USB port, but no power switch exists for a controlled shutdown.
 
 This device connects to the GPIO and power pins of the extension port.
