@@ -19,17 +19,18 @@
   Required Hardware: 
     - Digispark ATTINY85 board
       o The Arduino is powered with 3.3V in order to have consistent voltage levels wrt the RPi
-      o The Arduino Tiny regulator is by passed and its best to remove it 
-      o The power LED of the ARDUINO pulls a few mA and should be disabled
+      o The Arduino Tiny regulator is by passed and its best to remove the 7805 
+      o The power LED of the ARDUINO pulls a few mA and should be disabled or at least the resistor increased to 10k
       o The USB pull-up resistor (1.5k) should be connected to USB 5V
     - The Bootloader runs at 16.5MHz. The clock speed is reduced by means of the clock prescaler (CLK_PRESC) down to approx. 1MHz
        o Timer setup is automatically adjusted to the chosen prescale factor
 
-  Raspberry Pi settings: Configure two GPIOs in /boot/config.txt
-                     - Shutdown: set to HIGH and raspi will start shutdown: 
-                       dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down  
-                     - Set pin to LOW when starting up. After a shutdown the GPIO is undefined. Pullup sets it to HIGH -> power can be switched off:
-                       gpio=27=op,dl
+  Raspberry Pi settings: 
+    Configure two GPIOs in /boot/config.txt
+      - Shutdown: set to HIGH and raspi will start shutdown:
+          dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down  
+      - Set pin to LOW when starting up. After a shutdown the GPIO is undefined. Pullup sets it to HIGH -> power can be switched off:
+          gpio=27=op,dl
                         
   Required package: CapacitiveSensor
 
@@ -55,10 +56,10 @@
   #define CLOCK_DIV clock_div_1
 #endif
 
-#define MosFET    0   // switch power of Raspi on/off (HIGH/LOW in case of p-channel FET) 
-#define Shutdown  1   // inform Raspi to shutdown - put green LED in series to adjust to 3.3V  
-#define raspHalt  3   // external pullup (1k5) and 3V Zener - Raspi sets this pin to (LOW) when running. Pulled to HIGH after shutdown 
-#define CapOut    4   // connect 1-10MOhm to touch surface (small metal piece)
+#define MosFET    0   // switch power of Raspi on/off (HIGH/LOW in case of a p-channel FET) 
+#define Shutdown  1   // inform Raspi to shutdown  
+#define raspHalt  3   // Raspi sets this pin to (LOW) when running. Pulled to HIGH after shutdown 
+#define CapOut    4   // connect 1-10MOhm to touch surface (small metal pin or surface)
 #define CapIn     2   // connect directly to touch surface
 #define CapThresh 20  // threshold to detect, that metal surface has been touched. NEEDS ADJUSTMENT! 
 
