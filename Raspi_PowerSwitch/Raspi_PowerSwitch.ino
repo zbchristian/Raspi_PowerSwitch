@@ -10,22 +10,20 @@
   How does the code work:
   - Button (touch surface) triggers the start/shutdown of the raspberry pi
   - Power is connected/disconnected from the raspi by means of a MOSFET ( p-channel with RDS(on)<=0.1 Ohm to diconnect +5V from Raspi ) 
-  - after disconnecting, the remaining current is a few mA
   - All timing is done in the Timer1 interrupt routine
   - Main loop samples the button, sets flags and acts accordingly (request shutdown/power on the raspi)
 
   The processor runs with a reduced clock speed to save power. Be aware, that this screws up the 
   the standard delay() function. Use delayms() instead, which uses a corrected timer.
 
-  Required Hardware: Digispark ATTINY85 board
-                     - BE CAREFUL: the ATTINY runs at 5V and the Raspberry PI only 3.3V. The voltage levels should be adjusted when connecting GPIO pins.
-                       o From ATTINY to GPIO: add a green LED, which reduces the output voltage by approx 2V
-                       o From GPIO to ATTINY: depends on the pin. An input pin can directly be attached (no pull-up!). A 10k series resistor is recommended
-                         to avoid current flow in shutdown state. Pin 3 of the Digispark has a Zener diode and pull-up attached. This limits the voltage 
-                         already to 3V. The GPIO should pull Pin 3 to ground only and best over a standard diode.
-                       o Add 
-                     - The Bootloader runs at 16.5MHz. The clock speed is reduced by means of the clock prescaler (CLK_PRESC) down to approx. 1MHz
-                       Timer setup is automatically adjusted to the chosen prescale factor
+  Required Hardware: 
+    - Digispark ATTINY85 board
+      o The Arduino is powered with 3.3V in order to have consistent voltage levels wrt the RPi
+      o The Arduino Tiny regulator is by passed and its best to remove it 
+      o The power LED of the ARDUINO pulls a few mA and should be disabled
+      o The USB pull-up resistor (1.5k) should be connected to USB 5V
+    - The Bootloader runs at 16.5MHz. The clock speed is reduced by means of the clock prescaler (CLK_PRESC) down to approx. 1MHz
+       o Timer setup is automatically adjusted to the chosen prescale factor
 
   Raspberry Pi settings: Configure two GPIOs in /boot/config.txt
                      - Shutdown: set to HIGH and raspi will start shutdown: 
@@ -35,7 +33,7 @@
                         
   Required package: CapacitiveSensor
 
-  C. Zeitnitz 2021
+  C. Zeitnitz 2021-24
 */
 #include <avr/power.h>
 #include <CapacitiveSensor.h>
