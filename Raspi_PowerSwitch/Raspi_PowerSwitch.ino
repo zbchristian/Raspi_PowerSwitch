@@ -1,7 +1,7 @@
 /*
   Raspberry Pi Power Switch with Digispark ATTINY85
   =================================================
-  Port 0 : control power MOSFET n-channel to ground
+  Port 0 : control  p-channel power MOSFET
   Port 1 : toggle shutdown pin of Raspi (active high) 
   Port 2 : receive pin for touch button
   Port 3 : receive shutdown info from raspi (LOW)
@@ -9,7 +9,7 @@
 
   How does the code work:
   - Button (touch surface) triggers the start/shutdown of the raspberry pi
-  - Power is connected/disconnected from the raspi by means of a MOSFET ( n-channel with RDS(on)<=0.1 Ohm to diconnect GND from Raspi ) 
+  - Power is connected/disconnected from the raspi by means of a MOSFET ( p-channel with RDS(on)<=0.1 Ohm to diconnect +5V from Raspi ) 
   - after disconnecting, the remaining current is a few mA
   - All timing is done in the Timer1 interrupt routine
   - Main loop samples the button, sets flags and acts accordingly (request shutdown/power on the raspi)
@@ -57,7 +57,7 @@
   #define CLOCK_DIV clock_div_1
 #endif
 
-#define MosFET    0   // switch power of Raspi on/off (LOW/HIGH in case of n-channel) 
+#define MosFET    0   // switch power of Raspi on/off (HIGH/LOW in case of p-channel FET) 
 #define Shutdown  1   // inform Raspi to shutdown - put green LED in series to adjust to 3.3V  
 #define raspHalt  3   // external pullup (1k5) and 3V Zener - Raspi sets this pin to (LOW) when running. Pulled to HIGH after shutdown 
 #define CapOut    4   // connect 1-10MOhm to touch surface (small metal piece)
